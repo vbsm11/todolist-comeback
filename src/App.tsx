@@ -10,13 +10,15 @@ import TodoList from './TodoList';
 // CRUD operations
 
 
-function App() {
+function App(): JSX.Element {
 
     // JSX
 
     return (
         <div className="App">
-            <TodoList/>
+            <TodoList title={'What to learn'}/>
+            <TodoList title={'What to buy'}/>
+            <TodoList title={'What to read'}/>
         </div>
     );
 }
