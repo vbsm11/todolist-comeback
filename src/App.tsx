@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import TodoList from './TodoList';
 
@@ -17,18 +17,22 @@ export type TaskType = {
 
 function App(): JSX.Element {
 
-    const tasks: Array<TaskType> = [
+    const [tasks, setTasks] = useState([
         {id: 1, title: 'HTML&CSS', isDone: true},
         {id: 2, title: 'JS', isDone: true},
         {id: 3, title: 'React', isDone: false},
         {id: 4, title: 'Redux', isDone: false},
-    ]
+    ])
+
+    const removeTask = (taskId: number) => {
+        setTasks(tasks.filter(t => t.id !== taskId))
+    }
 
     // JSX
 
     return (
         <div className="App">
-            <TodoList title={'What to learn'} tasks={tasks}/>
+            <TodoList title={'What to learn'} tasks={tasks} removeTask={removeTask}/>
         </div>
     );
 }
