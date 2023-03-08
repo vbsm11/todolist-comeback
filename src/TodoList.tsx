@@ -7,6 +7,15 @@ type TodoListPropsType = {
 }
 
 const TodoList: FC<TodoListPropsType> = (props) => {
+
+    const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) =>
+        <li>
+            <input type="checkbox" checked={task.isDone}/>
+            <span>{task.title}</span>
+            <button onClick={() => {alert(task.id)}}>x</button>
+        </li>
+    )
+
     return (
         <div className="todolist">
             <h3>{props.title}</h3>
@@ -15,18 +24,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 <button>+</button>
             </div>
             <ul>
-                <li>
-                    <input type="checkbox" checked={props.tasks[0].isDone}/>
-                    <span>{props.tasks[0].title}</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={props.tasks[1].isDone}/>
-                    <span>{props.tasks[1].title}</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={props.tasks[2].isDone}/>
-                    <span>{props.tasks[2].title}</span>
-                </li>
+                {todoListItems}
             </ul>
             <div>
                 <button>All</button>
