@@ -44,11 +44,15 @@ function App(): JSX.Element {
         tasksForRender = tasks.filter(t => t.isDone)
     }
 
+    const changeTodolistFilter = (filter: FilterValueType) => {
+        setFilter(filter)
+    }
+
     // JSX
 
     return (
         <div className="App">
-            <TodoList title={'What to learn'} tasks={tasksForRender} removeTask={removeTask}/>
+            <TodoList title={'What to learn'} tasks={tasksForRender} removeTask={removeTask} changeTodolistFilter={changeTodolistFilter}/>
         </div>
     );
 }
