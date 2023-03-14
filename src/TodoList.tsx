@@ -30,7 +30,12 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             <h3>{props.title}</h3>
             <div>
                 <input value={title} onChange={(e) => setTitle(e.currentTarget.value)}/>
-                <button onClick={addTaskHandler}>+</button>
+                <button
+                    onClick={addTaskHandler}
+                    disabled={title.length === 0}
+                >+</button>
+                {title.length > 10 && title.length <=20? <div style={{color: 'hotpink'}}>Title should be shorter</div> : ''}
+                {title.length > 20? <div style={{color: 'red'}}>Title is too long</div> : ''}
             </div>
             <ul>
                 {todoListItems}
