@@ -29,7 +29,12 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         <div className="todolist">
             <h3>{props.title}</h3>
             <div>
-                <input value={title} onChange={(e) => setTitle(e.currentTarget.value)}/>
+                <input
+                    placeholder={'Enter task title'}
+                    value={title}
+                    onChange={(e) => setTitle(e.currentTarget.value)}
+                    onKeyDown={e => {e.key === 'Enter' && addTaskHandler()}}
+                />
                 <button
                     onClick={addTaskHandler}
                     disabled={title.length === 0}
