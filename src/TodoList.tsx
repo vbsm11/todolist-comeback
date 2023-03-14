@@ -6,6 +6,7 @@ type TodoListPropsType = {
     tasks: TaskType[]
     removeTask: (taskId: string) => void
     changeTodolistFilter: (filter: FilterValueType) => void
+    addTask: (title: string) => void
 }
 
 const TodoList: FC<TodoListPropsType> = (props) => {
@@ -23,7 +24,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             <h3>{props.title}</h3>
             <div>
                 <input/>
-                <button>+</button>
+                <button onClick={() => {props.addTask('new task')}}>+</button>
             </div>
             <ul>
                 {todoListItems}

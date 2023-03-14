@@ -31,6 +31,13 @@ function App(): JSX.Element {
         setTasks(tasks.filter(t => t.id !== taskId))
     }
 
+    const addTask = (title: string) => {
+        setTasks([{
+            id: v1(),
+            title: title,
+            isDone: false
+        }, ...tasks])
+    }
 
     const [filter, setFilter] = useState<FilterValueType>('all')
 
@@ -59,6 +66,7 @@ function App(): JSX.Element {
                 tasks={tasksForRender}
                 removeTask={removeTask}
                 changeTodolistFilter={changeTodolistFilter}
+                addTask={addTask}
             />
         </div>
     );
