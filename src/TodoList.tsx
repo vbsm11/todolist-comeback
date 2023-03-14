@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {ChangeEvent, FC, useState, KeyboardEvent} from 'react';
 import {FilterValueType, TaskType} from './App';
 
 type TodoListPropsType = {
@@ -12,18 +12,46 @@ type TodoListPropsType = {
 const TodoList: FC<TodoListPropsType> = (props) => {
     const [title, setTitle] = useState<string>('')
 
-      const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) =>
-        <li>
-            <input type="checkbox" checked={task.isDone}/>
-            <span>{task.title}</span>
-            <button onClick={() => {props.removeTask(task.id)}}>x</button>
-        </li>
-    )
+    const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
+        const removeTaskHandler = () => {props.removeTask(task.id)}
+        return (
+            <li>
+                <input type="checkbox" checked={task.isDone}/>
+                <span>{task.title}</span>
+                <button onClick={removeTaskHandler}>x</button>
+            </li>
+        )
+    })
+
+    const maxTaskTitleLength = 20
+    const recommendedTaskTitleLength = 10
+
+    const isAddTaskNotPossible: boolean = title.length === 0 || title.length > maxTaskTitleLength
+
+    const longTitleWarningMessage = title.length > recommendedTaskTitleLength && title.length <= maxTaskTitleLength
+        ? <div style={{color: 'hotpink'}}>Title should be shorter</div>
+        : ''
+
+    const longTitleErrorMessage = title.length > maxTaskTitleLength
+        ? <div style={{color: 'red'}}>Title is too long</div>
+        : ''
 
     const addTaskHandler = () => {
         props.addTask(title)
         setTitle('')
     }
+
+    const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+    }
+
+    const onKeyDownAddTaskHandler = isAddTaskNotPossible
+        ? undefined
+        : (e: KeyboardEvent<HTMLInputElement>) => {
+        e.key === 'Enter' && addTaskHandler()
+    }
+
+
 
     return (
         <div className="todolist">
@@ -32,15 +60,15 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 <input
                     placeholder={'Enter task title'}
                     value={title}
-                    onChange={(e) => setTitle(e.currentTarget.value)}
-                    onKeyDown={e => {e.key === 'Enter' && addTaskHandler()}}
+                    onChange={setLocalTitleHandler}
+                    onKeyDown={onKeyDownAddTaskHandler}
                 />
                 <button
                     onClick={addTaskHandler}
-                    disabled={title.length === 0}
+                    disabled={isAddTaskNotPossible}
                 >+</button>
-                {title.length > 10 && title.length <=20? <div style={{color: 'hotpink'}}>Title should be shorter</div> : ''}
-                {title.length > 20? <div style={{color: 'red'}}>Title is too long</div> : ''}
+                {longTitleWarningMessage}
+                {longTitleErrorMessage}
             </div>
             <ul>
                 {todoListItems}
