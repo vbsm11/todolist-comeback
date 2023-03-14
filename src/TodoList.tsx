@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useRef} from 'react';
 import {FilterValueType, TaskType} from './App';
 
 type TodoListPropsType = {
@@ -11,6 +11,8 @@ type TodoListPropsType = {
 
 const TodoList: FC<TodoListPropsType> = (props) => {
 
+    const addTaskInputRef = useRef<any>(null)
+
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) =>
         <li>
             <input type="checkbox" checked={task.isDone}/>
@@ -19,12 +21,17 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         </li>
     )
 
+    const addTaskHandler = () => {
+        props.addTask(addTaskInputRef.current.value)
+        addTaskInputRef.current.value = ''
+    }
+
     return (
         <div className="todolist">
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <button onClick={() => {props.addTask('new task')}}>+</button>
+                <input ref={addTaskInputRef}/>
+                <button onClick={addTaskHandler}>+</button>
             </div>
             <ul>
                 {todoListItems}
