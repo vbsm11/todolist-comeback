@@ -39,8 +39,8 @@ function App(): JSX.Element {
         }, ...tasks])
     }
 
-    const changeTaskStatus = (taskId: string) => {
-        setTasks(tasks.map(t => t.id === taskId? {...t, isDone: !t.isDone} : t))
+    const changeTaskStatus = (taskId: string, newIsDone: boolean) => {
+        setTasks(tasks.map(t => t.id === taskId? {...t, isDone: newIsDone} : t))
     }
 
     const [filter, setFilter] = useState<FilterValueType>('all')
@@ -69,9 +69,9 @@ function App(): JSX.Element {
                 title={'What to learn'}
                 tasks={tasksForRender}
                 removeTask={removeTask}
+                addTask={addTask}
                 changeTaskStatus={changeTaskStatus}
                 changeTodolistFilter={changeTodolistFilter}
-                addTask={addTask}
             />
         </div>
     );
