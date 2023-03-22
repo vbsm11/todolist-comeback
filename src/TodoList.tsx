@@ -7,6 +7,7 @@ type TodoListPropsType = {
     removeTask: (taskId: string) => void
     changeTodolistFilter: (filter: FilterValueType) => void
     addTask: (title: string) => void
+    changeTaskStatus: (taskId: string) => void
 }
 
 const TodoList: FC<TodoListPropsType> = (props) => {
@@ -14,9 +15,12 @@ const TodoList: FC<TodoListPropsType> = (props) => {
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
         const removeTaskHandler = () => {props.removeTask(task.id)}
+        const changeTaskStatusHandler = () => {
+            props.changeTaskStatus(task.id)
+        }
         return (
             <li>
-                <input type="checkbox" checked={task.isDone}/>
+                <input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHandler}/>
                 <span>{task.title}</span>
                 <button onClick={removeTaskHandler}>x</button>
             </li>
@@ -40,6 +44,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         props.addTask(title)
         setTitle('')
     }
+
 
     const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
