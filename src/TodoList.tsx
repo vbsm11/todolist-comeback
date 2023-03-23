@@ -4,6 +4,7 @@ import {FilterValueType, TaskType} from './App';
 type TodoListPropsType = {
     title: string,
     tasks: TaskType[]
+    filter: FilterValueType
     removeTask: (taskId: string) => void
     addTask: (title: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean) => void
@@ -14,7 +15,9 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     const [title, setTitle] = useState<string>('')
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
-        const removeTaskHandler = () => {props.removeTask(task.id)}
+        const removeTaskHandler = () => {
+            props.removeTask(task.id)
+        }
         const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
 
         return (
@@ -24,7 +27,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     checked={task.isDone}
                     onChange={changeTaskStatusHandler}
                 />
-                <span className={task.isDone? 'task-done' : 'task'}>{task.title}</span>
+                <span className={task.isDone ? 'task-done' : 'task'}>{task.title}</span>
                 <button onClick={removeTaskHandler}>x</button>
             </li>
         )
@@ -56,9 +59,8 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     const onKeyDownAddTaskHandler = isAddTaskNotPossible
         ? undefined
         : (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && addTaskHandler()
-    }
-
+            e.key === 'Enter' && addTaskHandler()
+        }
 
 
     return (
@@ -74,7 +76,8 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 <button
                     onClick={addTaskHandler}
                     disabled={isAddTaskNotPossible}
-                >+</button>
+                >+
+                </button>
                 {longTitleWarningMessage}
                 {longTitleErrorMessage}
             </div>
@@ -82,9 +85,21 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 {todoListItems}
             </ul>
             <div>
-                <button onClick={() => props.changeTodolistFilter('all')}>All</button>
-                <button onClick={() => props.changeTodolistFilter('active')}>Active</button>
-                <button onClick={() => props.changeTodolistFilter('completed')}>Completed</button>
+                <button
+                    className={props.filter === 'all' ? 'btn-active' : ''}
+                    onClick={() => props.changeTodolistFilter('all')}
+                >All
+                </button>
+                <button
+                    className={props.filter === 'active' ? 'btn-active' : ''}
+                    onClick={() => props.changeTodolistFilter('active')}
+                >Active
+                </button>
+                <button
+                    className={props.filter === 'completed' ? 'btn-active' : ''}
+                    onClick={() => props.changeTodolistFilter('completed')}
+                >Completed
+                </button>
             </div>
         </div>
     );
