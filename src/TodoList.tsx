@@ -39,15 +39,17 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     const maxTaskTitleLength = 20
     const recommendedTaskTitleLength = 10
 
-    const isAddTaskNotPossible: boolean = title.length === 0 || title.length > maxTaskTitleLength
+    const isAddTaskNotPossible: boolean = title.length === 0 || title.length > maxTaskTitleLength || error
 
-    const longTitleWarningMessage = title.length > recommendedTaskTitleLength && title.length <= maxTaskTitleLength
+    const longTitleWarningMessage = title.trim().length > recommendedTaskTitleLength && title.trim().length <= maxTaskTitleLength
         ? <div style={{color: 'hotpink'}}>Title should be shorter</div>
         : ''
 
-    const longTitleErrorMessage = title.length > maxTaskTitleLength
+    const longTitleErrorMessage = title.trim().length > maxTaskTitleLength
         ? <div style={{color: 'red'}}>Title is too long</div>
         : ''
+
+    const errorMessage = error && <div style={{color: 'red'}}>Title is required</div>
 
     const addTaskHandler = () => {
         const trimmedTitle = title.trim()
@@ -90,6 +92,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 </button>
                 {longTitleWarningMessage}
                 {longTitleErrorMessage}
+                {errorMessage}
             </div>
             <ul>
                 {todoListItems}
