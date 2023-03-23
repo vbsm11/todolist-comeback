@@ -12,3 +12,12 @@
   border-radius: 5px;
   padding: 20px;
 }
+
+.task {
+  font-weight: bold;
+}
+
+.task-done {
+  font-weight: normal;
+  text-decoration: line-through;
+}
