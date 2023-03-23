@@ -12,7 +12,10 @@ type TodoListPropsType = {
 }
 
 const TodoList: FC<TodoListPropsType> = (props) => {
+
     const [title, setTitle] = useState<string>('')
+
+    const [error, setError] = useState<boolean>(false)
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
         const removeTaskHandler = () => {
@@ -47,12 +50,18 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         : ''
 
     const addTaskHandler = () => {
-        props.addTask(title)
+        const trimmedTitle = title.trim()
+        if (trimmedTitle) {
+            props.addTask(title)
+        } else {
+            setError(true)
+        }
         setTitle('')
     }
 
 
     const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        error && setError(false)
         setTitle(e.currentTarget.value)
     }
 
@@ -69,6 +78,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             <div>
                 <input
                     placeholder={'Enter task title'}
+                    className={error? 'input-error' : ''}
                     value={title}
                     onChange={setLocalTitleHandler}
                     onKeyDown={onKeyDownAddTaskHandler}
