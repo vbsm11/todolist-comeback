@@ -107,6 +107,7 @@ function App(): JSX.Element {
         const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
         return (
         <TodoList
+            key = {tl.id}
             todoListId = {tl.id}
             title={tl.title}
             tasks={tasksForRender}
