@@ -30,6 +30,8 @@ export type TaskStateType = {
 
 function App(): JSX.Element {
 
+    // BLL:
+
     const todoListId_1 = v1()
     const todoListId_2 = v1()
 
@@ -87,6 +89,8 @@ function App(): JSX.Element {
         delete tasks[todoListId]
     }
 
+    // UI:
+
     const getFilteredTasks = (tasks: TaskType[], filter: FilterValueType) => {
         switch (filter) {
             case 'active':
@@ -98,21 +102,27 @@ function App(): JSX.Element {
         }
     }
 
-    const tasksForRender: TaskType[] = getFilteredTasks(tasks, filter)
+
+    const todoListsComponents = todoLists.map(tl => {
+        const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
+        return (
+        <TodoList
+            todoListId = {tl.id}
+            title={tl.title}
+            tasks={tasksForRender}
+            filter={tl.filter}
+            removeTask={removeTask}
+            addTask={addTask}
+            changeTaskStatus={changeTaskStatus}
+            changeTodolistFilter={changeTodolistFilter}
+        />)
+    })
 
     // JSX
 
     return (
         <div className="App">
-            <TodoList
-                title={'What to learn'}
-                tasks={tasksForRender}
-                filter={filter}
-                removeTask={removeTask}
-                addTask={addTask}
-                changeTaskStatus={changeTaskStatus}
-                changeTodolistFilter={changeTodolistFilter}
-            />
+            {todoListsComponents}
         </div>
     );
 }
