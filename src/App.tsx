@@ -25,7 +25,7 @@ export type TodoListType = {
 }
 
 export type TaskStateType = {
-    [todoListId: string]: Array<TaskType>
+    [todoListId: string]: TaskType[]
 }
 
 function App(): JSX.Element {
@@ -38,29 +38,37 @@ function App(): JSX.Element {
         {id: todoListId_2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [tasks, setTasks] = useState<TaskStateType>(
+    const [tasks, setTasks] = useState<TaskStateType>({
         [todoListId_1]: [
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'React', isDone: false},
-        {id: v1(), title: 'Redux', isDone: false},
-    ],
+            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'JS', isDone: true},
+            {id: v1(), title: 'React', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false}
+        ],
         [todoListId_2]: [
-        {id: v1(), title: 'Bread', isDone: false},
-        {id: v1(), title: 'Meat', isDone: false},
-        {id: v1(), title: 'Milk', isDone: true},
-    ])
+            {id: v1(), title: 'Bread', isDone: false},
+            {id: v1(), title: 'Meat', isDone: false},
+            {id: v1(), title: 'Milk', isDone: true},
+        ]
+    })
+
 
     const removeTask = (todoListId: string, taskId: string) => {
-        setTasks({...tasks, [todoListId]: tasks[todoListId].filter(t => t.id !== taskId)})
+        setTasks({
+            ...tasks,
+            [todoListId]: tasks[todoListId].filter(t => t.id !== taskId)
+        })
     }
 
     const addTask = (todoListId: string, title: string) => {
-        setTasks([{
-            id: v1(),
-            title: title,
-            isDone: false
-        }, ...tasks])
+        setTasks({
+            ...tasks,
+            [todoListId]: [
+                {id: v1(), title: title, isDone: false},
+                ...tasks[todoListId]
+            ]
+        })
+
     }
 
     const changeTaskStatus = (taskId: string, newIsDone: boolean) => {
