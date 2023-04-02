@@ -108,10 +108,12 @@ function App(): JSX.Element {
         return (
         <TodoList
             key = {tl.id}
+
             todoListId = {tl.id}
             title={tl.title}
             tasks={tasksForRender}
             filter={tl.filter}
+
             removeTask={removeTask}
             addTask={addTask}
             changeTaskStatus={changeTaskStatus}
