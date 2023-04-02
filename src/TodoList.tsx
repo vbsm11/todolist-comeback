@@ -10,6 +10,7 @@ type TodoListPropsType = {
     addTask: (todoListId: string, title: string) => void
     changeTaskStatus: (todoListId: string, taskId: string, newIsDone: boolean) => void
     changeTodolistFilter: (todoListId: string, filter: FilterValueType) => void
+    removeTodoList: (todoListId: string) => void
 }
 
 const TodoList: FC<TodoListPropsType> = (props) => {
@@ -74,10 +75,16 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             e.key === 'Enter' && addTaskHandler()
         }
 
+        const removeTodoListHandler = () => {
+          props.removeTodoList(props.todoListId)
+        }
+
 
     return (
         <div className="todolist">
+            <button onClick={removeTodoListHandler}>Х</button>
             <h3>{props.title}</h3>
+
             <div>
                 <input
                     placeholder={'Enter task title'}

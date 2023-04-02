@@ -115,6 +115,7 @@ function App(): JSX.Element {
             addTask={addTask}
             changeTaskStatus={changeTaskStatus}
             changeTodolistFilter={changeTodolistFilter}
+            removeTodoList={removeTodoList}
         />)
     })
 
