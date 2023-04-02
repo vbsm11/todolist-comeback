@@ -18,6 +18,12 @@ export type TaskType = {
 
 export type FilterValueType = 'all' | 'active' | 'completed'
 
+export type TodoListType = {
+    id: string
+    title: string
+    filter: FilterValueType
+}
+
 function App(): JSX.Element {
 
     const [tasks, setTasks] = useState<TaskType[]>([
