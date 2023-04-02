@@ -24,27 +24,38 @@ export type TodoListType = {
     filter: FilterValueType
 }
 
+export type TaskStateType = {
+    [todoListId: string]: Array<TaskType>
+}
+
 function App(): JSX.Element {
 
     const todoListId_1 = v1()
     const todoListId_2 = v1()
+
     const [todoLists, setTodoLists] = useState<TodoListType[]>([
         {id: todoListId_1, title: 'What to learn', filter: 'all'},
         {id: todoListId_2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [tasks, setTasks] = useState<TaskType[]>([
+    const [tasks, setTasks] = useState<TaskStateType>(
+        [todoListId_1]: [
         {id: v1(), title: 'HTML&CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
         {id: v1(), title: 'React', isDone: false},
         {id: v1(), title: 'Redux', isDone: false},
+    ],
+        [todoListId_2]: [
+        {id: v1(), title: 'Bread', isDone: false},
+        {id: v1(), title: 'Meat', isDone: false},
+        {id: v1(), title: 'Milk', isDone: true},
     ])
 
-    const removeTask = (taskId: string) => {
-        setTasks(tasks.filter(t => t.id !== taskId))
+    const removeTask = (todoListId: string, taskId: string) => {
+        setTasks({...tasks, [todoListId]: tasks[todoListId].filter(t => t.id !== taskId)})
     }
 
-    const addTask = (title: string) => {
+    const addTask = (todoListId: string, title: string) => {
         setTasks([{
             id: v1(),
             title: title,
@@ -53,24 +64,23 @@ function App(): JSX.Element {
     }
 
     const changeTaskStatus = (taskId: string, newIsDone: boolean) => {
-        setTasks(tasks.map(t => t.id === taskId? {...t, isDone: newIsDone} : t))
+        setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: newIsDone} : t))
     }
 
-    const [filter, setFilter] = useState<FilterValueType>('all')
 
     const changeTodolistFilter = (filter: FilterValueType) => {
         setFilter(filter)
     }
 
     const getFilteredTasks = (tasks: TaskType[], filter: FilterValueType) => {
-      switch (filter) {
-          case 'active':
-              return tasks.filter(t => !t.isDone)
-          case 'completed':
-              return tasks.filter(t => t.isDone)
-          default:
-              return tasks
-      }
+        switch (filter) {
+            case 'active':
+                return tasks.filter(t => !t.isDone)
+            case 'completed':
+                return tasks.filter(t => t.isDone)
+            default:
+                return tasks
+        }
     }
 
     const tasksForRender: TaskType[] = getFilteredTasks(tasks, filter)
