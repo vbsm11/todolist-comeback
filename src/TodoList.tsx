@@ -16,7 +16,7 @@ type TodoListPropsType = {
 
 const TodoList: FC<TodoListPropsType> = (props) => {
 
-    const [title, setTitle] = useState<string>('')
+
 
     const [error, setError] = useState<boolean>(false)
 
