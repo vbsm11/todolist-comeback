@@ -16,9 +16,6 @@ type TodoListPropsType = {
 
 const TodoList: FC<TodoListPropsType> = (props) => {
 
-
-    const [error, setError] = useState<boolean>(false)
-
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
         const removeTaskHandler = () => {
             props.removeTask(props.todoListId, task.id)
@@ -38,20 +35,11 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         )
     })
 
-    const maxTaskTitleLength = 20
-    const recommendedTaskTitleLength = 10
 
 
 
-    const longTitleWarningMessage = title.trim().length > recommendedTaskTitleLength && title.trim().length <= maxTaskTitleLength
-        ? <div style={{color: 'hotpink'}}>Title should be shorter</div>
-        : ''
 
-    const longTitleErrorMessage = title.trim().length > maxTaskTitleLength
-        ? <div style={{color: 'red'}}>Title is too long</div>
-        : ''
 
-    const errorMessage = error && <div style={{color: 'red'}}>Title is required</div>
 
     const addTaskHandler = () => {
         const trimmedTitle = title.trim()
