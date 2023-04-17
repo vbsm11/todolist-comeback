@@ -1,5 +1,6 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent} from 'react';
 import {FilterValueType, TaskType} from './App';
+import AddItemForm from './AddItemForm';
 
 type TodoListPropsType = {
     todoListId: string
@@ -85,23 +86,8 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             <button onClick={removeTodoListHandler}>Х</button>
             <h3>{props.title}</h3>
 
-            <div>
-                <input
-                    placeholder={'Enter task title'}
-                    className={error? 'input-error' : ''}
-                    value={title}
-                    onChange={setLocalTitleHandler}
-                    onKeyDown={onKeyDownAddTaskHandler}
-                />
-                <button
-                    onClick={addTaskHandler}
-                    disabled={isAddTaskNotPossible}
-                >+
-                </button>
-                {longTitleWarningMessage}
-                {longTitleErrorMessage}
-                {errorMessage}
-            </div>
+            <AddItemForm/>
+
             <ul>
                 {todoListItems}
             </ul>
