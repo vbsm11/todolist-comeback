@@ -1,14 +1,13 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
 
-const AddItemForm = () => {
+type AddItemFormPropsType = {
+    addItem: (title: string) => void
+}
+
+const AddItemForm: FC<AddItemFormPropsType> = (props) => {
 
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<boolean>(false)
-
-    const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        error && setError(false)
-        setTitle(e.currentTarget.value)
-    }
 
     const maxTaskTitleLength = 20
     const recommendedTaskTitleLength = 10
@@ -25,6 +24,27 @@ const AddItemForm = () => {
 
     const errorMessage = error && <div style={{color: 'red'}}>Title is required</div>
 
+    const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        error && setError(false)
+        setTitle(e.currentTarget.value)
+    }
+
+    const addItemHandler = () => {
+        const trimmedTitle = title.trim()
+        if (trimmedTitle) {
+            props.addItem(title)
+        } else {
+            setError(true)
+        }
+        setTitle('')
+    }
+
+    const onKeyDownAddItemHandler = isAddNotPossible
+        ? undefined
+        : (e: KeyboardEvent<HTMLInputElement>) => {
+            e.key === 'Enter' && addItemHandler()
+        }
+
     return (
         <div>
             <input
@@ -32,10 +52,10 @@ const AddItemForm = () => {
                 className={error? 'input-error' : ''}
                 value={title}
                 onChange={setLocalTitleHandler}
-                onKeyDown={onKeyDownAddTaskHandler}
+                onKeyDown={onKeyDownAddItemHandler}
             />
             <button
-                onClick={addTaskHandler}
+                onClick={addItemHandler}
                 disabled={isAddNotPossible}
             >+
             </button>

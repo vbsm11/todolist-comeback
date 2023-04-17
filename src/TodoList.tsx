@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent, FC} from 'react';
 import {FilterValueType, TaskType} from './App';
 import AddItemForm from './AddItemForm';
 
@@ -35,42 +35,20 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         )
     })
 
-
-
-
-
-
-
-    const addTaskHandler = () => {
-        const trimmedTitle = title.trim()
-        if (trimmedTitle) {
-            props.addTask(props.todoListId, title)
-        } else {
-            setError(true)
-        }
-        setTitle('')
+    const removeTodoListHandler = () => {
+        props.removeTodoList(props.todoListId)
     }
 
-
-
-
-    const onKeyDownAddTaskHandler = isAddTaskNotPossible
-        ? undefined
-        : (e: KeyboardEvent<HTMLInputElement>) => {
-            e.key === 'Enter' && addTaskHandler()
-        }
-
-        const removeTodoListHandler = () => {
-          props.removeTodoList(props.todoListId)
-        }
-
+    const addTask = (title: string) => {
+        props.addTask(props.todoListId, title)
+    }
 
     return (
         <div className="todolist">
             <button onClick={removeTodoListHandler}>Х</button>
             <h3>{props.title}</h3>
 
-            <AddItemForm/>
+            <AddItemForm addItem={addTask}/>
 
             <ul>
                 {todoListItems}
@@ -78,12 +56,12 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             <div>
                 <button
                     className={props.filter === 'all' ? 'btn-active' : ''}
-                    onClick={() => props.changeTodolistFilter(props.todoListId,'all')}
+                    onClick={() => props.changeTodolistFilter(props.todoListId, 'all')}
                 >All
                 </button>
                 <button
                     className={props.filter === 'active' ? 'btn-active' : ''}
-                    onClick={() => props.changeTodolistFilter(props.todoListId,'active')}
+                    onClick={() => props.changeTodolistFilter(props.todoListId, 'active')}
                 >Active
                 </button>
                 <button
