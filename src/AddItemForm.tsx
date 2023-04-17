@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 const AddItemForm = () => {
 
     const [title, setTitle] = useState<string>('')
+
+    const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        error && setError(false)
+        setTitle(e.currentTarget.value)
+    }
 
     return (
         <div>

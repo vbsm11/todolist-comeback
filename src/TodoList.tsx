@@ -17,7 +17,6 @@ type TodoListPropsType = {
 const TodoList: FC<TodoListPropsType> = (props) => {
 
 
-
     const [error, setError] = useState<boolean>(false)
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
@@ -65,10 +64,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     }
 
 
-    const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        error && setError(false)
-        setTitle(e.currentTarget.value)
-    }
+
 
     const onKeyDownAddTaskHandler = isAddTaskNotPossible
         ? undefined
