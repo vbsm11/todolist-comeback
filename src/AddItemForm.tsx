@@ -9,6 +9,8 @@ const AddItemForm = () => {
         setTitle(e.currentTarget.value)
     }
 
+    const isAddNotPossible: boolean = title.length === 0 || title.length > maxTaskTitleLength || error
+
     return (
         <div>
             <input
@@ -20,7 +22,7 @@ const AddItemForm = () => {
             />
             <button
                 onClick={addTaskHandler}
-                disabled={isAddTaskNotPossible}
+                disabled={isAddNotPossible}
             >+
             </button>
             {longTitleWarningMessage}

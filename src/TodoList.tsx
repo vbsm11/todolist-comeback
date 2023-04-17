@@ -41,7 +41,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     const maxTaskTitleLength = 20
     const recommendedTaskTitleLength = 10
 
-    const isAddTaskNotPossible: boolean = title.length === 0 || title.length > maxTaskTitleLength || error
+
 
     const longTitleWarningMessage = title.trim().length > recommendedTaskTitleLength && title.trim().length <= maxTaskTitleLength
         ? <div style={{color: 'hotpink'}}>Title should be shorter</div>
