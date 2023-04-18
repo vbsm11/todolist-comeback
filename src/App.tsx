@@ -89,6 +89,11 @@ function App(): JSX.Element {
         delete tasks[todoListId]
     }
 
+    const addTodolist = (title: string) => {
+        const newTodolistId = v1()
+        setTodoLists([{id: newTodolistId, title: title, filter: 'all'}, ...todoLists])
+    }
+
     // UI:
 
     const getFilteredTasks = (tasks: TaskType[], filter: FilterValueType) => {

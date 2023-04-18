@@ -32,3 +32,12 @@
   outline: none;
   border: 2px solid red;
 }
+
+.titleWithButton {
+  margin-bottom: 8px;
+}
+
+.todoTitle {
+  font-size: 110%;
+  font-weight: bold;
+}

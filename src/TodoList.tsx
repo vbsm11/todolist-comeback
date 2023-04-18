@@ -45,9 +45,10 @@ const TodoList: FC<TodoListPropsType> = (props) => {
 
     return (
         <div className="todolist">
-            <button onClick={removeTodoListHandler}>Х</button>
-            <h3>{props.title}</h3>
-
+            <div className={'titleWithButton'}>
+                <span className={'todoTitle'}>{props.title}</span>
+                <button onClick={removeTodoListHandler}>Х</button>
+            </div>
             <AddItemForm addItem={addTask}/>
 
             <ul>
