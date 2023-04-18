@@ -134,8 +134,11 @@ function App(): JSX.Element {
             removeTask={removeTask}
             addTask={addTask}
             changeTaskStatus={changeTaskStatus}
+            changeTaskTitle={changeTaskTitle}
+
             changeTodolistFilter={changeTodolistFilter}
             removeTodoList={removeTodoList}
+            changeTodolistTitle={changeTodolistTitle}
         />)
     })
 
