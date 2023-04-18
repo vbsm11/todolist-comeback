@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC} from 'react';
 import {FilterValueType, TaskType} from './App';
-import AddItemForm from './AddItemForm';
+import {AddItemForm} from './AddItemForm';
 
 type TodoListPropsType = {
     todoListId: string

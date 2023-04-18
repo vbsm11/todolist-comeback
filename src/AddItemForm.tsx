@@ -4,7 +4,7 @@ type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-const AddItemForm: FC<AddItemFormPropsType> = (props) => {
+export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
 
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<boolean>(false)
@@ -48,7 +48,7 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     return (
         <div>
             <input
-                placeholder={'Enter task title'}
+                placeholder={'Enter title'}
                 className={error? 'input-error' : ''}
                 value={title}
                 onChange={setLocalTitleHandler}
@@ -64,6 +64,4 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
             {errorMessage}
         </div>
     );
-};
-
-export default AddItemForm;
+}
