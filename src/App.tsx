@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import TodoList from './TodoList';
 import {v1} from 'uuid';
+import AddItemForm from './AddItemForm';
 
 // create
 // read
@@ -91,7 +92,8 @@ function App(): JSX.Element {
 
     const addTodolist = (title: string) => {
         const newTodolistId = v1()
-        setTodoLists([{id: newTodolistId, title: title, filter: 'all'}, ...todoLists])
+        setTodoLists([...todoLists, {id: newTodolistId, title: title, filter: 'all'}])
+        setTasks({...tasks, [newTodolistId]: []})
     }
 
     // UI:
@@ -131,6 +133,7 @@ function App(): JSX.Element {
 
     return (
         <div className="App">
+            <AddItemForm addItem={addTodolist}/>
             {todoListsComponents}
         </div>
     );
