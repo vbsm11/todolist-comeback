@@ -91,6 +91,10 @@ function App(): JSX.Element {
         setTodoLists(todoLists.map(tl => tl.id === todoListId? {...tl, filter}: tl))
     }
 
+    const changeTodolistTitle = (todoListId: string, title: string) => {
+        setTodoLists(todoLists.map(tl => tl.id === todoListId? {...tl, title}: tl))
+    }
+
     const removeTodoList = (todoListId: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListId))
         delete tasks[todoListId]
