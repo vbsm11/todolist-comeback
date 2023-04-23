@@ -3,6 +3,8 @@ import './App.css';
 import TodoList from './TodoList';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
+import {AppBar, Button, IconButton, Toolbar, Typography} from '@mui/material';
+import {Menu} from '@mui/icons-material';
 
 
 // create
@@ -146,6 +148,25 @@ function App(): JSX.Element {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar style={{justifyContent: 'space-between'}}>
+                    <IconButton
+                        size='large'
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{mr: 2}}
+                    >
+                        <Menu/>
+                    </IconButton>
+                        Todolists
+                        <Typography variant="h6" component={'div'} sx={{flexGrow: 1}}>
+                    </Typography>
+                    <Button color="inherit" variant={'outlined'}>
+                        Login
+                    </Button>
+                </Toolbar>
+            </AppBar>
             <AddItemForm addItem={addTodolist}/>
             {todoListsComponents}
         </div>
