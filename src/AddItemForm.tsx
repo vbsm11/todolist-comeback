@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import {IconButton} from '@mui/material';
+import {IconButton, TextField} from '@mui/material';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -16,15 +16,15 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
 
     const isAddNotPossible: boolean = !title.length || title.length > maxTaskTitleLength || error
 
-    const longTitleWarningMessage = title.trim().length > recommendedTaskTitleLength && title.trim().length <= maxTaskTitleLength
-        ? <div style={{color: 'hotpink'}}>Title should be shorter</div>
+    const longTitleWarningMessage = title.length > recommendedTaskTitleLength && title.length <= maxTaskTitleLength
+        ? <span style={{color: 'hotpink'}}>Title should be shorter</span>
         : ''
 
-    const longTitleErrorMessage = title.trim().length > maxTaskTitleLength
-        ? <div style={{color: 'red'}}>Title is too long</div>
+    const longTitleErrorMessage = title.length > maxTaskTitleLength
+        ? <span style={{color: 'red'}}>Title is too long</span>
         : ''
 
-    const errorMessage = error && <div style={{color: 'red'}}>Title is required</div>
+    const errorMessage = error && 'Title is required'
 
     const setLocalTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         error && setError(false)
@@ -49,9 +49,12 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
 
     return (
         <div>
-            <input
-                placeholder={'Enter title'}
-                className={error ? 'input-error' : ''}
+            <TextField
+                variant={'standard'}
+                size={'small'}
+                placeholder={'Enter title please'}
+                error={error}
+                helperText={errorMessage || longTitleWarningMessage || longTitleErrorMessage}
                 value={title}
                 onChange={setLocalTitleHandler}
                 onKeyDown={onKeyDownAddItemHandler}
@@ -63,9 +66,6 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
             >
                 <AddCircleIcon/>
             </IconButton>
-            {longTitleWarningMessage}
-            {longTitleErrorMessage}
-            {errorMessage}
         </div>
     );
 }
