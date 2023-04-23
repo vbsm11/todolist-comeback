@@ -1,4 +1,6 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import {IconButton} from '@mui/material';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -49,16 +51,18 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
         <div>
             <input
                 placeholder={'Enter title'}
-                className={error? 'input-error' : ''}
+                className={error ? 'input-error' : ''}
                 value={title}
                 onChange={setLocalTitleHandler}
                 onKeyDown={onKeyDownAddItemHandler}
             />
-            <button
+            <IconButton
+                size={'small'}
                 onClick={addItemHandler}
                 disabled={isAddNotPossible}
-            >+
-            </button>
+            >
+                <AddCircleIcon/>
+            </IconButton>
             {longTitleWarningMessage}
             {longTitleErrorMessage}
             {errorMessage}
