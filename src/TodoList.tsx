@@ -42,6 +42,14 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 divider
                 key={task.id}
                 disablePadding
+                secondaryAction={
+                    <IconButton
+                        size={'small'}
+                        onClick={removeTaskHandler}
+                    >
+                        <DeleteForeverIcon/>
+                    </IconButton>
+                }
             >
                 <Checkbox
                     size={'small'}
@@ -53,12 +61,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     spanClasses={taskClasses}
                     changeTitle={changeTaskTitleHandler}
                 />
-                <IconButton
-                    size={'small'}
-                    onClick={removeTaskHandler}
-                >
-                    <DeleteForeverIcon/>
-                </IconButton>
+
             </ListItem>
         )
     })
@@ -94,7 +97,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             </List>
             <div className={'btn-filter-container'}>
                 <Button
-                    size='small'
+                    size='medium'
                     variant='contained'
                     disableElevation
                     color={props.filter === 'all' ? 'secondary' : 'primary'}
@@ -102,7 +105,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 >All
                 </Button>
                 <Button
-                    size='small'
+                    size='medium'
                     variant='contained'
                     disableElevation
                     color={props.filter === 'active' ? 'secondary' : 'primary'}
@@ -110,7 +113,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 >Active
                 </Button>
                 <Button
-                    size='small'
+                    size='medium'
                     variant='contained'
                     disableElevation
                     color={props.filter === 'completed' ? 'secondary' : 'primary'}

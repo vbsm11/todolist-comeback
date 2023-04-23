@@ -4,11 +4,11 @@
 }
 
 .App > div {
-  margin-right: 50px;
+  margin-right: 35px;
 }
 
 .todolist {
-  width: 240px;
+  width: 280px;
   border: 2px solid hotpink;
   border-radius: 5px;
   padding: 20px;
@@ -23,23 +23,14 @@
   text-decoration: line-through;
 }
 
-.btn-active {
-  background-color: cornflowerblue;
-  color: white;
-  border: 2px solid cornflowerblue;
-}
 
-.input-error {
-  outline: none;
-  border: 2px solid red;
-}
 
 .titleWithButton {
   margin-bottom: 8px;
 }
 
 .todoTitle {
-  font-size: 110%;
+  font-size: 140%;
   font-weight: bold;
 }
 

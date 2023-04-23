@@ -50,7 +50,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     return (
         <div>
             <TextField
-                variant={'standard'}
+                variant={'outlined'}
                 size={'small'}
                 placeholder={'Enter title please'}
                 error={error}
