@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC} from 'react';
 import {FilterValueType, TaskType} from './App';
 import {AddItemForm} from './AddItemForm';
 import EditableSpan from './EditableSpan';
-import {Button, Checkbox, IconButton, ListItem} from '@mui/material';
+import {Button, Checkbox, IconButton, List, ListItem} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type TodoListPropsType = {
@@ -39,6 +39,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
 
         return (
             <ListItem
+                divider
                 key={task.id}
                 disablePadding
             >
@@ -88,9 +89,9 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             </div>
             <AddItemForm addItem={addTask}/>
 
-            <ul>
+            <List>
                 {todoListItems}
-            </ul>
+            </List>
             <div className={'btn-filter-container'}>
                 <Button
                     size='small'
