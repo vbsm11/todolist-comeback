@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC} from 'react';
 import {FilterValueType, TaskType} from './App';
 import {AddItemForm} from './AddItemForm';
 import EditableSpan from './EditableSpan';
-import {Button, IconButton} from '@mui/material';
+import {Button, Checkbox, IconButton, ListItem} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type TodoListPropsType = {
@@ -38,9 +38,12 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         }
 
         return (
-            <li>
-                <input
-                    type="checkbox"
+            <ListItem
+                key={task.id}
+                disablePadding
+            >
+                <Checkbox
+                    size={'small'}
                     checked={task.isDone}
                     onChange={changeTaskStatusHandler}
                 />
@@ -55,7 +58,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 >
                     <DeleteForeverIcon/>
                 </IconButton>
-            </li>
+            </ListItem>
         )
     })
 
