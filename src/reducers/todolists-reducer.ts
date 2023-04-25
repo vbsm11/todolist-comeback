@@ -40,3 +40,10 @@ export const todoListsReducer = (todoLists: TodoListType[], action: ActionType):
             return todoLists
     }
 }
+
+export const RemoveTodoListAC = (id: string): RemoveTodoListAT => {
+  return {
+      type: 'REMOVE-TODOLIST',
+      id: id
+  }
+}
