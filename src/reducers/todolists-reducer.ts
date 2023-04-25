@@ -47,3 +47,10 @@ export const RemoveTodoListAC = (id: string): RemoveTodoListAT => {
       id: id
   }
 }
+
+export const AddTodoListAC = (title: string): AddTodoListAT => {
+    return {
+        type: 'ADD-TODOLIST',
+        title: title
+    }
+}
