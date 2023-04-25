@@ -54,3 +54,11 @@ export const AddTodoListAC = (title: string): AddTodoListAT => {
         title: title
     }
 }
+
+export const ChangeTodoListTitleAC = (id: string, title: string): ChangeTodoListTitleAT => {
+    return {
+        type: 'CHANGE-TODOLIST-TITLE',
+        id: id,
+        title: title
+    }
+}
