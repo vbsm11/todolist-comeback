@@ -71,6 +71,7 @@ test('correct task should change status', () => {
 
     const endState = tasksReducer(startState, ChangeTaskStatusAC(todoListId_1, startState[todoListId_1][2].id, !startState[todoListId_1][2].isDone))
 
+    expect(endState[todoListId_1][2].title).toBe('React')
     expect(endState[todoListId_1][2].isDone).toBe(true)
 })
 
@@ -95,6 +96,7 @@ test('correct task should change title', () => {
     const endState = tasksReducer(startState, ChangeTaskTitleAC(todoListId_2, startState[todoListId_2][1].id, 'Fish'))
 
     expect(endState[todoListId_2][1].title).toBe('Fish')
+    expect(endState[todoListId_1][1].title).toBe('JS')
 })
 
 test('tasks for current todolist should be removed', () => {
@@ -116,6 +118,8 @@ test('tasks for current todolist should be removed', () => {
     }
 
     const endState = tasksReducer(startState, RemoveTodoListAC(todoListId_2))
+    const keys = Object.keys(endState)
 
+    expect(keys.length).toBe(1)
     expect(endState[todoListId_2]).toBe(undefined)
 })
