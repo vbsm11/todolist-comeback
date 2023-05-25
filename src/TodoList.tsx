@@ -44,7 +44,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 disablePadding
                 secondaryAction={
                     <IconButton
-                        size={'small'}
+                        size='small'
                         onClick={removeTaskHandler}
                     >
                         <DeleteForeverIcon/>
@@ -52,7 +52,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 }
             >
                 <Checkbox
-                    size={'small'}
+                    size='small'
                     checked={task.isDone}
                     onChange={changeTaskStatusHandler}
                 />
@@ -82,9 +82,9 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     return (
         <div className="todolist">
             <div className={'titleWithButton'}>
-                <EditableSpan title={props.title} spanClasses={'todoTitle'} changeTitle={changeTodolistTitleHandler}/>
+                <EditableSpan title={props.title} spanClasses='todoTitle' changeTitle={changeTodolistTitleHandler}/>
                 <IconButton
-                    size={'small'}
+                    size='small'
                     onClick={removeTodoListHandler}
                 >
                     <DeleteForeverIcon/>
@@ -95,7 +95,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             <List>
                 {todoListItems}
             </List>
-            <div className={'btn-filter-container'}>
+            <div className='btn-filter-container'>
                 <Button
                     size='medium'
                     variant='contained'

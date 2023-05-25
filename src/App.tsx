@@ -6,7 +6,7 @@ import {AddItemForm} from './AddItemForm';
 import {
     AppBar,
     Button, Checkbox,
-    Container,
+    Container, createTheme,
     CssBaseline, FormControlLabel, FormGroup,
     Grid,
     IconButton,
@@ -165,13 +165,13 @@ function App(): JSX.Element {
 
     const mode = isDarkMode ? 'dark' : 'light'
 
-    const customTheme = {
+    const customTheme = createTheme({
         palette: {
             primary: lime,
             secondary: teal,
             mode: mode
         }
-    }
+    })
 
     // JSX
 
@@ -200,7 +200,7 @@ function App(): JSX.Element {
                                         onChange={(e) => setDarkMode(e.currentTarget.checked)}
                                     />
                                 }
-                                label={isDarkMode? 'Turn off dark mode': 'Turn on dark mode'}
+                                label={isDarkMode ? 'Turn off dark mode' : 'Turn on dark mode'}
                             />
                         </FormGroup>
                         <Button color="inherit" variant={'outlined'}>
