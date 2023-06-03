@@ -49,6 +49,15 @@ export type TaskType = {
 
 export type FilterValueType = 'all' | 'active' | 'completed'
 
+export type TodoListType = {
+    id: string
+    title: string
+    filter: FilterValueType
+}
+
+export type TaskStateType = {
+    [todoListId: string]: TaskType[]
+}
 
 function AppWithReducers(): JSX.Element {
 
