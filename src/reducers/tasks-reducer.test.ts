@@ -4,22 +4,29 @@ import {AddTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC, tasksRed
 import {AddTodoListAC, RemoveTodoListAC} from './todolists-reducer';
 
 
-const todoListId_1 = v1()
-const todoListId_2 = v1()
+let todoListId_1: string
+let todoListId_2: string
 
-const startState: TaskStateType = {
-    [todoListId_1]: [
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'React', isDone: false},
-        {id: v1(), title: 'Redux', isDone: false}
-    ],
-    [todoListId_2]: [
-        {id: v1(), title: 'Bread', isDone: false},
-        {id: v1(), title: 'Meat', isDone: false},
-        {id: v1(), title: 'Milk', isDone: true},
-    ]
-}
+let startState: TaskStateType
+
+beforeEach(() => {
+    todoListId_1 = v1()
+    todoListId_2 = v1()
+
+    startState = {
+        [todoListId_1]: [
+            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'JS', isDone: true},
+            {id: v1(), title: 'React', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false}
+        ],
+        [todoListId_2]: [
+            {id: v1(), title: 'Bread', isDone: false},
+            {id: v1(), title: 'Meat', isDone: false},
+            {id: v1(), title: 'Milk', isDone: true},
+        ]
+    }
+})
 
 test('correct task should be removed', () => {
 
