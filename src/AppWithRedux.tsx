@@ -62,7 +62,7 @@ function AppWithRedux(): JSX.Element {
     // BLL:
 
     const todoLists = useSelector<AppRootStateType, TodoListType[]>(state => state.todoLists)
-    const tasks = useSelector<AppRootStateType, TaskStateType>(state => state.tasks)
+    // const tasks = useSelector<AppRootStateType, TaskStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
     const [isDarkMode, setDarkMode] = useState<boolean>()
@@ -114,9 +114,9 @@ function AppWithRedux(): JSX.Element {
 
 
     const todoListsComponents = todoLists.map(tl => {
-        const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
+        // const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
         return (
-            <Grid item>
+            <Grid key={tl.id} item>
                 <Paper elevation={8}>
                     {/*<TodoList*/}
                     {/*    key={tl.id}*/}
