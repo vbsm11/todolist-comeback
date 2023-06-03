@@ -23,7 +23,7 @@ import {
     ChangeTodoListTitleAC,
     RemoveTodoListAC, TodoListsActionType,
     todoListsReducer
-} from './reducers/todolists-reducer';
+} from './state/todolists-reducer';
 import {
     AddTaskAC,
     ChangeTaskStatusAC,
@@ -31,7 +31,7 @@ import {
     RemoveTaskAC,
     TasksActionType,
     tasksReducer
-} from './reducers/tasks-reducer';
+} from './state/tasks-reducer';
 
 
 // create
