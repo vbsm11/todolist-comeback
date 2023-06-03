@@ -33,7 +33,7 @@ export type TasksActionType = RemoveTaskAT | AddTaskAT | ChangeTaskStatusAT | Ch
 const initialState: TaskStateType = {}
 
 
-export const tasksReducer = (tasks: TaskStateType = initialState, action: TasksActionType): TaskStateType => {
+export const tasksReducer = (tasks = initialState, action: TasksActionType): TaskStateType => {
     switch (action.type) {
         case 'REMOVE-TASK':
             return {
