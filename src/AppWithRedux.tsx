@@ -71,9 +71,9 @@ function AppWithRedux(): JSX.Element {
         dispatch(RemoveTaskAC(todoListId, taskId))
     }
 
-    const addTask = (todoListId: string, title: string) => {
+    const addTask = useCallback((todoListId: string, title: string) => {
         dispatch(AddTaskAC(todoListId, title))
-    }
+    }, [dispatch])
 
     const changeTaskStatus = (todoListId: string, taskId: string, newIsDone: boolean) => {
         dispatch(ChangeTaskStatusAC(todoListId, taskId, newIsDone))
