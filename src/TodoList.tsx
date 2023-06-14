@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useCallback} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {FilterValueType, TaskType} from './App';
 import {AddItemForm} from './AddItemForm';
 import EditableSpan from './EditableSpan';
@@ -21,7 +21,7 @@ type TodoListPropsType = {
     changeTodolistTitle: (todoListId: string, title: string) => void
 }
 
-const TodoList: FC<TodoListPropsType> = (props) => {
+const TodoList = memo((props:TodoListPropsType) => {
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
 
@@ -122,7 +122,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+})
 
 export default TodoList;

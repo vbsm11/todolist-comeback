@@ -29,7 +29,6 @@ import {
 import {AddTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from './state/tasks-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-import TodoListWithRedux from './TodoListWithRedux';
 
 
 // create
@@ -67,37 +66,37 @@ function AppWithRedux(): JSX.Element {
 
     const [isDarkMode, setDarkMode] = useState<boolean>()
 
-    const removeTask = (todoListId: string, taskId: string) => {
+    const removeTask = useCallback((todoListId: string, taskId: string) => {
         dispatch(RemoveTaskAC(todoListId, taskId))
-    }
+    }, [dispatch])
 
     const addTask = useCallback((todoListId: string, title: string) => {
         dispatch(AddTaskAC(todoListId, title))
     }, [dispatch])
 
-    const changeTaskStatus = (todoListId: string, taskId: string, newIsDone: boolean) => {
+    const changeTaskStatus = useCallback((todoListId: string, taskId: string, newIsDone: boolean) => {
         dispatch(ChangeTaskStatusAC(todoListId, taskId, newIsDone))
-    }
+    }, [dispatch])
 
-    const changeTaskTitle = (todoListId: string, taskId: string, newTitle: string) => {
+    const changeTaskTitle = useCallback((todoListId: string, taskId: string, newTitle: string) => {
         dispatch(ChangeTaskTitleAC(todoListId, taskId, newTitle))
-    }
+    }, [dispatch])
 
-    const changeTodolistFilter = (todoListId: string, filter: FilterValueType) => {
+    const changeTodolistFilter = useCallback((todoListId: string, filter: FilterValueType) => {
         dispatch(ChangeTodoListFilterAC(todoListId, filter))
-    }
+    }, [dispatch])
 
-    const changeTodolistTitle = (todoListId: string, title: string) => {
+    const changeTodolistTitle = useCallback((todoListId: string, title: string) => {
         dispatch(ChangeTodoListTitleAC(todoListId, title))
-    }
+    }, [dispatch])
 
-    const removeTodoList = (todoListId: string) => {
+    const removeTodoList = useCallback((todoListId: string) => {
         dispatch(RemoveTodoListAC(todoListId))
-    }
+    }, [dispatch])
 
     const addTodolist = useCallback((title: string) => {
         dispatch(AddTodoListAC(title))
-    }, [])
+    }, [dispatch])
 
     // UI:
 
