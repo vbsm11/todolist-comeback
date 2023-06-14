@@ -100,20 +100,8 @@ function AppWithRedux(): JSX.Element {
 
     // UI:
 
-    const getFilteredTasks = (tasks: TaskType[], filter: FilterValueType) => {
-        switch (filter) {
-            case 'active':
-                return tasks.filter(t => !t.isDone)
-            case 'completed':
-                return tasks.filter(t => t.isDone)
-            default:
-                return tasks
-        }
-    }
-
 
     const todoListsComponents = todoLists.map(tl => {
-        const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
         return (
             <Grid key={tl.id} item>
                 <Paper elevation={8}>
@@ -122,7 +110,7 @@ function AppWithRedux(): JSX.Element {
 
                         todoListId={tl.id}
                         title={tl.title}
-                        tasks={tasksForRender}
+                        tasks={tasks[tl.id]}
                         filter={tl.filter}
 
                         removeTask={removeTask}

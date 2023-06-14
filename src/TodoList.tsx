@@ -23,7 +23,22 @@ type TodoListPropsType = {
 
 const TodoList = memo((props:TodoListPropsType) => {
 
-    const todoListItems: Array<JSX.Element> = props.tasks.map((task: TaskType) => {
+    console.log('TodoList')
+
+    const getFilteredTasks = (tasks: TaskType[], filter: FilterValueType) => {
+        switch (filter) {
+            case 'active':
+                return tasks.filter(t => !t.isDone)
+            case 'completed':
+                return tasks.filter(t => t.isDone)
+            default:
+                return tasks
+        }
+    }
+
+    const tasksForRender: TaskType[] = getFilteredTasks(props.tasks, props.filter)
+
+    const todoListItems: Array<JSX.Element> = tasksForRender.map((task: TaskType) => {
 
         const taskClasses = task.isDone ? 'task-done' : 'task'
 
