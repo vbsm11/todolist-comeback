@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import TodoList from './TodoList';
 import {AddItemForm} from './AddItemForm';
@@ -62,7 +62,7 @@ function AppWithRedux(): JSX.Element {
     // BLL:
 
     const todoLists = useSelector<AppRootStateType, TodoListType[]>(state => state.todoLists)
-    // const tasks = useSelector<AppRootStateType, TaskStateType>(state => state.tasks)
+    const tasks = useSelector<AppRootStateType, TaskStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
     const [isDarkMode, setDarkMode] = useState<boolean>()
@@ -95,9 +95,9 @@ function AppWithRedux(): JSX.Element {
         dispatch(RemoveTodoListAC(todoListId))
     }
 
-    const addTodolist = (title: string) => {
+    const addTodolist = useCallback((title: string) => {
         dispatch(AddTodoListAC(title))
-    }
+    }, [])
 
     // UI:
 
@@ -114,28 +114,28 @@ function AppWithRedux(): JSX.Element {
 
 
     const todoListsComponents = todoLists.map(tl => {
-        // const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
+        const tasksForRender: TaskType[] = getFilteredTasks(tasks[tl.id], tl.filter)
         return (
             <Grid key={tl.id} item>
                 <Paper elevation={8}>
-                    {/*<TodoList*/}
-                    {/*    key={tl.id}*/}
+                    <TodoList
+                        key={tl.id}
 
-                    {/*    todoListId={tl.id}*/}
-                    {/*    title={tl.title}*/}
-                    {/*    tasks={tasksForRender}*/}
-                    {/*    filter={tl.filter}*/}
+                        todoListId={tl.id}
+                        title={tl.title}
+                        tasks={tasksForRender}
+                        filter={tl.filter}
 
-                    {/*    removeTask={removeTask}*/}
-                    {/*    addTask={addTask}*/}
-                    {/*    changeTaskStatus={changeTaskStatus}*/}
-                    {/*    changeTaskTitle={changeTaskTitle}*/}
+                        removeTask={removeTask}
+                        addTask={addTask}
+                        changeTaskStatus={changeTaskStatus}
+                        changeTaskTitle={changeTaskTitle}
 
-                    {/*    changeTodolistFilter={changeTodolistFilter}*/}
-                    {/*    removeTodoList={removeTodoList}*/}
-                    {/*    changeTodolistTitle={changeTodolistTitle}*/}
-                    {/*/>*/}
-                    <TodoListWithRedux todoList={tl}/>
+                        changeTodolistFilter={changeTodolistFilter}
+                        removeTodoList={removeTodoList}
+                        changeTodolistTitle={changeTodolistTitle}
+                    />
+                    {/*<TodoListWithRedux todoList={tl}/>*/}
                 </Paper>
             </Grid>)
     })
