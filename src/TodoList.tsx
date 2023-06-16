@@ -5,6 +5,7 @@ import EditableSpan from './EditableSpan';
 import {Button, IconButton, List} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {Task} from './Task';
+import {TaskWithRedux} from './TaskWithRedux';
 
 type TodoListPropsType = {
     todoListId: string
@@ -54,13 +55,14 @@ const TodoList = memo((props: TodoListPropsType) => {
     const todoListItems: Array<JSX.Element> = tasksForRender.map((task: TaskType) => {
 
         return (
-            <Task
-                key={task.id}
-                task={task}
-                removeTask={removeTask}
-                changeTaskStatus={changeTaskStatus}
-                changeTaskTitle={changeTaskTitle}
-            />
+            // <Task
+            //     key={task.id}
+            //     task={task}
+            //     removeTask={removeTask}
+            //     changeTaskStatus={changeTaskStatus}
+            //     changeTaskTitle={changeTaskTitle}
+            // />
+            <TaskWithRedux key={task.id} todoListId={props.todoListId} taskId={task.id}/>
         )
     })
 
