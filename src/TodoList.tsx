@@ -116,7 +116,7 @@ const TodoList = memo((props: TodoListPropsType) => {
                     callBack={onActiveClickHandler}
                 />
                 <ButtonWithMemo
-                    title={'Completes'}
+                    title={'Completed'}
                     color={props.filter === 'completed' ? 'secondary' : 'primary'}
                     callBack={onCompletedClickHandler}
                 />
