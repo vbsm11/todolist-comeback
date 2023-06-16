@@ -76,6 +76,17 @@ const TodoList = memo((props: TodoListPropsType) => {
         props.changeTodolistTitle(props.todoListId, title)
     }, [props.changeTodolistTitle, props.todoListId])
 
+    const onAllClickHandler = useCallback(() => {
+      props.changeTodolistFilter(props.todoListId, 'all')
+    }, [props.changeTodolistFilter, props.todoListId])
+
+    const onCompletedClickHandler = useCallback(() => {
+        props.changeTodolistFilter(props.todoListId, 'completed')
+    }, [props.changeTodolistFilter, props.todoListId])
+
+    const onActiveClickHandler = useCallback(() => {
+        props.changeTodolistFilter(props.todoListId, 'active')
+    }, [props.changeTodolistFilter, props.todoListId])
 
     return (
         <div className="todolist">
@@ -99,7 +110,7 @@ const TodoList = memo((props: TodoListPropsType) => {
                     variant="contained"
                     disableElevation
                     color={props.filter === 'all' ? 'secondary' : 'primary'}
-                    onClick={() => props.changeTodolistFilter(props.todoListId, 'all')}
+                    onClick={onAllClickHandler}
                 >All
                 </Button>
                 <Button
@@ -107,7 +118,7 @@ const TodoList = memo((props: TodoListPropsType) => {
                     variant="contained"
                     disableElevation
                     color={props.filter === 'active' ? 'secondary' : 'primary'}
-                    onClick={() => props.changeTodolistFilter(props.todoListId, 'active')}
+                    onClick={onActiveClickHandler}
                 >Active
                 </Button>
                 <Button
@@ -115,7 +126,7 @@ const TodoList = memo((props: TodoListPropsType) => {
                     variant="contained"
                     disableElevation
                     color={props.filter === 'completed' ? 'secondary' : 'primary'}
-                    onClick={() => props.changeTodolistFilter(props.todoListId, 'completed')}
+                    onClick={onCompletedClickHandler}
                 >Completed
                 </Button>
             </div>
