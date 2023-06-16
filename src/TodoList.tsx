@@ -1,9 +1,10 @@
-import React, {ChangeEvent, memo, useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import {FilterValueType, TaskType} from './App';
 import {AddItemForm} from './AddItemForm';
 import EditableSpan from './EditableSpan';
-import {Button, Checkbox, IconButton, List, ListItem} from '@mui/material';
+import {Button, IconButton, List} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import {Task} from './Task';
 
 type TodoListPropsType = {
     todoListId: string
@@ -21,7 +22,7 @@ type TodoListPropsType = {
     changeTodolistTitle: (todoListId: string, title: string) => void
 }
 
-const TodoList = memo((props:TodoListPropsType) => {
+const TodoList = memo((props: TodoListPropsType) => {
 
     console.log('TodoList')
 
@@ -38,46 +39,28 @@ const TodoList = memo((props:TodoListPropsType) => {
 
     const tasksForRender: TaskType[] = getFilteredTasks(props.tasks, props.filter)
 
+    const removeTask = useCallback((taskId: string) => {
+        props.removeTask(props.todoListId, taskId)
+    }, [props.removeTask, props.todoListId])
+
+    const changeTaskStatus = useCallback((taskId: string, newIsDone: boolean) => {
+        props.changeTaskStatus(props.todoListId, taskId, newIsDone)
+    }, [props.changeTaskStatus, props.todoListId])
+
+    const changeTaskTitle = useCallback((taskId: string, newTitle: string) => {
+        props.changeTaskTitle(props.todoListId, taskId, newTitle)
+    }, [props.changeTaskTitle, props.todoListId])
+
     const todoListItems: Array<JSX.Element> = tasksForRender.map((task: TaskType) => {
 
-        const taskClasses = task.isDone ? 'task-done' : 'task'
-
-        const removeTaskHandler = () => {
-            props.removeTask(props.todoListId, task.id)
-        }
-
-        const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(props.todoListId, task.id, e.currentTarget.checked)
-
-        const changeTaskTitleHandler = (title: string) => {
-            props.changeTaskTitle(props.todoListId, task.id, title)
-        }
-
         return (
-            <ListItem
-                divider
+            <Task
                 key={task.id}
-                disablePadding
-                secondaryAction={
-                    <IconButton
-                        size='small'
-                        onClick={removeTaskHandler}
-                    >
-                        <DeleteForeverIcon/>
-                    </IconButton>
-                }
-            >
-                <Checkbox
-                    size='small'
-                    checked={task.isDone}
-                    onChange={changeTaskStatusHandler}
-                />
-                <EditableSpan
-                    title={task.title}
-                    spanClasses={taskClasses}
-                    changeTitle={changeTaskTitleHandler}
-                />
-
-            </ListItem>
+                task={task}
+                removeTask={removeTask}
+                changeTaskStatus={changeTaskStatus}
+                changeTaskTitle={changeTaskTitle}
+            />
         )
     })
 
@@ -89,17 +72,17 @@ const TodoList = memo((props:TodoListPropsType) => {
         props.removeTodoList(props.todoListId)
     }
 
-    const changeTodolistTitleHandler = (title: string) => {
-      props.changeTodolistTitle(props.todoListId, title)
-    }
+    const changeTodolistTitleHandler = useCallback((title: string) => {
+        props.changeTodolistTitle(props.todoListId, title)
+    }, [props.changeTodolistTitle, props.todoListId])
 
 
     return (
         <div className="todolist">
             <div className={'titleWithButton'}>
-                <EditableSpan title={props.title} spanClasses='todoTitle' changeTitle={changeTodolistTitleHandler}/>
+                <EditableSpan title={props.title} spanClasses="todoTitle" changeTitle={changeTodolistTitleHandler}/>
                 <IconButton
-                    size='small'
+                    size="small"
                     onClick={removeTodoListHandler}
                 >
                     <DeleteForeverIcon/>
@@ -110,26 +93,26 @@ const TodoList = memo((props:TodoListPropsType) => {
             <List>
                 {todoListItems}
             </List>
-            <div className='btn-filter-container'>
+            <div className="btn-filter-container">
                 <Button
-                    size='medium'
-                    variant='contained'
+                    size="medium"
+                    variant="contained"
                     disableElevation
                     color={props.filter === 'all' ? 'secondary' : 'primary'}
                     onClick={() => props.changeTodolistFilter(props.todoListId, 'all')}
                 >All
                 </Button>
                 <Button
-                    size='medium'
-                    variant='contained'
+                    size="medium"
+                    variant="contained"
                     disableElevation
                     color={props.filter === 'active' ? 'secondary' : 'primary'}
                     onClick={() => props.changeTodolistFilter(props.todoListId, 'active')}
                 >Active
                 </Button>
                 <Button
-                    size='medium'
-                    variant='contained'
+                    size="medium"
+                    variant="contained"
                     disableElevation
                     color={props.filter === 'completed' ? 'secondary' : 'primary'}
                     onClick={() => props.changeTodolistFilter(props.todoListId, 'completed')}
