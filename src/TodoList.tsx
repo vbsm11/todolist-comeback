@@ -105,33 +105,43 @@ const TodoList = memo((props: TodoListPropsType) => {
                 {todoListItems}
             </List>
             <div className="btn-filter-container">
-                <Button
-                    size="medium"
-                    variant="contained"
-                    disableElevation
+                <ButtonWithMemo
+                    title={'All'}
                     color={props.filter === 'all' ? 'secondary' : 'primary'}
-                    onClick={onAllClickHandler}
-                >All
-                </Button>
-                <Button
-                    size="medium"
-                    variant="contained"
-                    disableElevation
+                    callBack={onAllClickHandler}
+                />
+                <ButtonWithMemo
+                    title={'Active'}
                     color={props.filter === 'active' ? 'secondary' : 'primary'}
-                    onClick={onActiveClickHandler}
-                >Active
-                </Button>
-                <Button
-                    size="medium"
-                    variant="contained"
-                    disableElevation
+                    callBack={onActiveClickHandler}
+                />
+                <ButtonWithMemo
+                    title={'Completes'}
                     color={props.filter === 'completed' ? 'secondary' : 'primary'}
-                    onClick={onCompletedClickHandler}
-                >Completed
-                </Button>
+                    callBack={onCompletedClickHandler}
+                />
             </div>
         </div>
     )
 })
 
 export default TodoList;
+
+type ButtonWithMemoPropsType = {
+    title: string
+    color: 'secondary' | 'primary'
+    callBack: () => void
+}
+
+const ButtonWithMemo = memo((props: ButtonWithMemoPropsType) => {
+    return (
+        <Button
+        size="medium"
+        variant="contained"
+        disableElevation
+        color={props.color}
+        onClick={props.callBack}
+    >{props.title}
+    </Button>
+    )
+})
