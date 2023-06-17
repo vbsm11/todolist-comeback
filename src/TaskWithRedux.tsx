@@ -2,43 +2,35 @@ import React, {ChangeEvent, memo, useCallback} from 'react';
 import EditableSpan from './EditableSpan';
 import {Checkbox, IconButton, ListItem} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from './state/store';
+import {useDispatch} from 'react-redux';
 import {TaskType} from './AppWithRedux';
 import {ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from './state/tasks-reducer';
 
 type TaskWithReduxPropsType = {
     todoListId: string
-    taskId: string
+    task: TaskType
 
 }
 
-export const TaskWithRedux = memo((props: TaskWithReduxPropsType) => {
+export const TaskWithRedux = memo(({todoListId, task}: TaskWithReduxPropsType) => {
 
     console.log('TaskWithRedux')
-
-    const task = useSelector<AppRootStateType, TaskType>(state => {
-        const task = state.tasks[props.todoListId].find(t => t.id === props.taskId)
-        if (task) {
-            return task
-        } else throw new Error()
-    })
 
     const dispatch = useDispatch()
 
     const taskClasses = task.isDone ? 'task-done' : 'task'
 
     const removeTaskHandler = () => {
-        dispatch(RemoveTaskAC(props.todoListId, props.taskId))
+        dispatch(RemoveTaskAC(todoListId, task.id))
     }
 
     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(ChangeTaskStatusAC(props.todoListId, props.taskId, e.currentTarget.checked))
+        dispatch(ChangeTaskStatusAC(todoListId, task.id, e.currentTarget.checked))
     }
 
     const changeTaskTitleHandler = useCallback((title: string) => {
-        dispatch(ChangeTaskTitleAC(props.todoListId, props.taskId, title))
-    }, [dispatch, props.todoListId, props.taskId])
+        dispatch(ChangeTaskTitleAC(todoListId, task.id, title))
+    }, [dispatch, todoListId, task.id])
 
     return (
         <ListItem

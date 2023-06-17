@@ -62,7 +62,7 @@ const TodoList = memo((props: TodoListPropsType) => {
             //     changeTaskStatus={changeTaskStatus}
             //     changeTaskTitle={changeTaskTitle}
             // />
-            <TaskWithRedux key={task.id} todoListId={props.todoListId} taskId={task.id}/>
+            <TaskWithRedux key={task.id} todoListId={props.todoListId} task={task}/>
         )
     })
 
