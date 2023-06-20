@@ -34,7 +34,7 @@ export const AddItemFormStory: Story = {
 export const AddItemFormError: FC<AddItemFormPropsType> = (args) => {
 
     const [title, setTitle] = useState<string>('')
-    const [error, setError] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(true)
 
     const maxTaskTitleLength = 20
     const recommendedTaskTitleLength = 10
