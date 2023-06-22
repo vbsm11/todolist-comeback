@@ -55,14 +55,14 @@ const TodoList = memo((props: TodoListPropsType) => {
     const todoListItems: Array<JSX.Element> = tasksForRender.map((task: TaskType) => {
 
         return (
-            // <Task
-            //     key={task.id}
-            //     task={task}
-            //     removeTask={removeTask}
-            //     changeTaskStatus={changeTaskStatus}
-            //     changeTaskTitle={changeTaskTitle}
-            // />
-            <TaskWithRedux key={task.id} todoListId={props.todoListId} task={task}/>
+            <Task
+                key={task.id}
+                task={task}
+                removeTask={removeTask}
+                changeTaskStatus={changeTaskStatus}
+                changeTaskTitle={changeTaskTitle}
+            />
+            // <TaskWithRedux key={task.id} todoListId={props.todoListId} task={task}/>
         )
     })
 

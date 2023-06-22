@@ -4,7 +4,7 @@ import EditableSpan from './EditableSpan';
 import {Checkbox, IconButton, ListItem} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-type TaskPropsType = {
+export type TaskPropsType = {
     task: TaskType
     removeTask: (taskId: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean) => void

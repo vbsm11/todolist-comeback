@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Task} from '../Task';
+import {Task, TaskPropsType} from '../Task';
 import {action} from '@storybook/addon-actions';
+import {FC, useState} from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof Task> = {
@@ -32,3 +33,20 @@ export const TaskIsNotDoneStory: Story = {
     }
 };
 
+const TaskWithHook: FC<TaskPropsType> = (args) => {
+    const [task, setTask] = useState(args.task)
+
+    const changeTaskStatus = (taskId: string, newIsDone: boolean) => {
+      setTask({...task, isDone: newIsDone})
+    }
+
+    const changeTaskTitle = (taskId: string, newTitle: string) => {
+        setTask({...task, title: newTitle})
+    }
+
+    return <Task task={args.task} removeTask={args.removeTask} changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}/>
+}
+
+export const TaskWithHookStory: Story = {
+    render: (args => <TaskWithHook task={args.task} removeTask={args.removeTask} changeTaskStatus={args.changeTaskStatus} changeTaskTitle={args.changeTaskTitle} />)
+}
