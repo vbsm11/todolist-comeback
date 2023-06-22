@@ -8,7 +8,7 @@ import {AppRootStateType} from '../../state/store';
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todoListsReducer
+    todoLists: todoListsReducer
 })
 
 const initialGlobalState = {
