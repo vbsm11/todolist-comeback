@@ -44,9 +44,12 @@ const TaskWithHook: FC<TaskPropsType> = (args) => {
         setTask({...task, title: newTitle})
     }
 
-    return <Task task={args.task} removeTask={args.removeTask} changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}/>
+    console.log(args)
+
+    return <Task task={task} removeTask={args.removeTask} changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}/>
 }
 
 export const TaskWithHookStory: Story = {
-    render: (args => <TaskWithHook task={args.task} removeTask={args.removeTask} changeTaskStatus={args.changeTaskStatus} changeTaskTitle={args.changeTaskTitle} />)
+    render: ((args:TaskPropsType) => <TaskWithHook task={args.task} removeTask={args.removeTask} changeTaskStatus={args.changeTaskStatus} changeTaskTitle={args.changeTaskTitle} />)
+
 }
