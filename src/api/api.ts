@@ -7,12 +7,10 @@ type TodolistType = {
     'order': number
 }
 
-type CreateTodolistResponseType = {
+type BasicResponseType<T={}> = {
     resultCode: number
     messages: string[]
-    data: {
-        item: TodolistType
-    }
+    data: T
 }
 
 const instance = axios.create({
@@ -25,12 +23,12 @@ export const todolistApi = {
         return instance.get<TodolistType[]>('todo-lists')
     },
     createTodolist(title: string) {
-        return instance.post<CreateTodolistResponseType>('todo-lists', {title})
+        return instance.post<BasicResponseType<{item: TodolistType}>>('todo-lists', {title})
     },
     deleteTodolist(todolistId: string) {
-        return instance.delete(`todo-lists/${todolistId}`)
+        return instance.delete<BasicResponseType>(`todo-lists/${todolistId}`)
     },
     updateTodolistTitle(todolistId: string, title: string) {
-        return instance.put(`todo-lists/${todolistId}`, {title})
+        return instance.put<BasicResponseType>(`todo-lists/${todolistId}`, {title})
     }
 }
