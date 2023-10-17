@@ -1,5 +1,12 @@
 import axios from 'axios'
 
+type TodolistType = {
+    "id": string
+    "title": string
+    "addedDate": string
+    "order": number
+}
+
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true
@@ -7,7 +14,7 @@ const instance = axios.create({
 
 export const todolistApi = {
     getTodolists() {
-        return instance.get('todo-lists')
+        return instance.get<TodolistType[]>('todo-lists')
     },
     createTodolist(title: string) {
        return instance.post('todo-lists', {title})
