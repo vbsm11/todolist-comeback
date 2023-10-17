@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
+import {todolistApi} from '../api/api';
 
 export default {
     title: 'API'
@@ -8,7 +9,7 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', {withCredentials: true})
+        todolistApi.getTodolists()
             .then(res => setState(res.data))
 
     }, [])
