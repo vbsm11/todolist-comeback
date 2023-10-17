@@ -9,5 +9,8 @@ export const todolistApi = {
     },
     deleteTodolist(todolistId: string) {
         return axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {withCredentials: true})
+    },
+    updateTodolistTitle(todolistId: string, title: string) {
+        return axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {title}, {withCredentials: true})
     }
 }
